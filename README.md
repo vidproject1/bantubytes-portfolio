@@ -2,7 +2,7 @@
 
 **Author: Charles**  
 **Version: 1.0.0**  
-**Last Updated: December 2024**
+**Last Updated: 11 nov 2025**
 
 ## 🎯 Project Overview
 
