@@ -1,0 +1,1065 @@
+/**
+ * Team Portfolio - Apple-Inspired Design Styles
+ * Author: Charles
+ * Description: Custom CSS for creating Apple-inspired micro-animations and smooth effects
+ * Version: 1.0.0
+ */
+
+/* ===================================
+   CSS Custom Properties (Variables)
+   =================================== */
+:root {
+  /* Apple-inspired color palette */
+  --apple-blue: #007AFF;
+  --apple-gray: #8E8E93;
+  --apple-light-gray: #F2F2F7;
+  --apple-dark-gray: #1C1C1E;
+  --apple-white: #FFFFFF;
+  --apple-black: #000000;
+  
+  /* Additional African-inspired colors */
+  --primary-color: #6b7280; /* Gray */
+    --secondary-color: #9ca3af; /* Light Gray */
+    --accent-color: #d4af37; /* African Gold */
+    --ubuntu-orange: #dd4814; /* Ubuntu Orange */
+    --nile-blue: #6b7280; /* Gray (replaced blue) */
+  
+  /* Spacing system */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* Border radius (Apple's signature rounded corners) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  
+  /* Shadows (Apple-style depth) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.20);
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================================
+   Global Styles
+   =================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--apple-dark-gray);
+  background-color: var(--apple-light-gray);
+  overflow-x: hidden;
+}
+
+/* ===================================
+   Navigation Styles
+   =================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  will-change: transform;
+}
+
+.navbar-container {
+  max-width: 80rem; /* ~1280px (Tailwind 7xl) */
+  margin: 0 auto;
+  padding: 1rem 1.5rem; /* py-4 px-6 */
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600;
+  color: #111827; /* text-gray-900 */
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem; /* space-x-8 */
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+.nav-link {
+  position: relative;
+  color: var(--apple-gray);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+    color: var(--ubuntu-orange);
+    border-bottom: 2px solid #6b7280;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--apple-blue);
+  transition: width var(--transition-medium);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--ubuntu-orange);
+}
+
+/* Navigation blur effect on scroll */
+nav.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-sm);
+  will-change: transform;
+}
+
+/* ===================================
+   Hero Section Styles
+   =================================== */
+.hero-button,
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: all var(--transition-medium);
+  /* Gradient outline around white button */
+  border: 2px solid transparent;
+  background-image: linear-gradient(#ffffff, #ffffff),
+                    linear-gradient(135deg, var(--ubuntu-orange), var(--accent-color));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  color: #000000;
+  padding: 1rem 2rem;
+  border-radius: 9999px; /* pill-style */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.hero-button:active {
+  transform: translateY(0);
+}
+
+/* Gradient text animation */
+.bg-gradient-to-r {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===================================
+   Team Card Styles (Apple-inspired)
+   =================================== */
+.team-card {
+  background: var(--apple-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-medium);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Card image container with overlay effect */
+.card-image-container {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  margin: 1rem;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.team-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* Overlay with project view button */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+}
+
+.team-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.view-project-btn {
+  background: linear-gradient(135deg, var(--accent-color), var(--ubuntu-orange));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transform: translateY(10px);
+  transition: all var(--transition-medium);
+}
+
+.team-card:hover .view-project-btn {
+  transform: translateY(0);
+}
+
+.view-project-btn:hover {
+  background: var(--apple-light-gray);
+  transform: scale(1.05);
+}
+
+/* Card content styling */
+.card-content {
+  padding: 1.5rem;
+}
+
+/* Technology tags */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tag {
+  background: rgba(221, 72, 20, 0.1);
+  color: var(--ubuntu-orange);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(221, 72, 20, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+}
+
+/* ===================================
+   Smooth Scroll Animations
+   =================================== */
+/* Custom AOS animations */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for team cards */
+.team-card:nth-child(1) { transition-delay: 0.1s; }
+.team-card:nth-child(2) { transition-delay: 0.2s; }
+.team-card:nth-child(3) { transition-delay: 0.3s; }
+.team-card:nth-child(4) { transition-delay: 0.4s; }
+.team-card:nth-child(5) { transition-delay: 0.5s; }
+.team-card:nth-child(6) { transition-delay: 0.6s; }
+
+/* ===================================
+   Project Modal Styles
+   =================================== */
+.project-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-modal.active .modal-content {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #6b7280, var(--ubuntu-orange));
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-header {
+  padding: 40px 40px 0;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 10px;
+}
+
+.modal-subtitle {
+  font-size: 1.2rem;
+  color: #86868b;
+  font-weight: 400;
+}
+
+.modal-body {
+  padding: 40px;
+}
+
+.project-screenshot {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.project-screenshot img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.project-details {
+  display: grid;
+  gap: 40px;
+}
+
+.project-description h3,
+.project-metrics h3,
+.tech-stack h3,
+.project-links h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+}
+
+.project-description p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #515154;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.metric {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.metric-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 5px;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: #86868b;
+  font-weight: 500;
+}
+
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-stack-tag {
+  background: linear-gradient(135deg, #0071e3, #0051a2);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tech-stack-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 113, 227, 0.3);
+}
+
+.link-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.project-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.github-btn {
+  background: linear-gradient(135deg, #6b7280, #1d1d1f);
+  color: white;
+}
+
+.github-btn:hover {
+  background: #2d2d2f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.demo-btn {
+  background: #0071e3;
+  color: white;
+}
+
+.demo-btn:hover {
+  background: #0051a2;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+@media (max-width: 768px) {
+  .team-card {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+  
+  .hero-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-button:last-child {
+    margin-bottom: 0;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .modal-header {
+    padding: 30px 30px 0;
+  }
+  
+  .modal-body {
+    padding: 30px;
+  }
+  
+  .modal-title {
+    font-size: 2rem;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .link-buttons {
+    flex-direction: column;
+  }
+}
+
+/* ===================================
+   Loading Animations
+   =================================== */
+/* Skeleton loading for images */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===================================
+   Interactive Elements
+   =================================== */
+/* Button press effect */
+.button-press {
+  transition: all var(--transition-fast);
+}
+
+.button-press:active {
+  transform: scale(0.95);
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--apple-blue);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, select, textarea {
+  transition: all var(--transition-fast);
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--apple-blue), #5856d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===================================
+   Print Styles
+   =================================== */
+@media print {
+  .team-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  .card-overlay {
+    display: none;
+  }
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.mobile-menu-btn .menu-icon {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.mobile-menu-btn.active .menu-icon:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-btn.active .menu-icon:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active .menu-icon:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 80px 20px 20px;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mobile-nav-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+    color: var(--ubuntu-orange);
+}
+
+/* Project Cards */
+.project-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.project-image img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-content h3 {
+    color: var(--ubuntu-orange);
+    margin-bottom: 8px;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+}
+
+/* Contact Page Styles */
+.contact-hero {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+}
+
+/* Utility classes for contact page */
+.w-full {
+    width: 100%;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.border {
+    border: 1px solid #e5e7eb;
+}
+
+.border-gray-300 {
+    border-color: #d1d5db;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.focus\:ring-2:focus {
+    box-shadow: 0 0 0 2px var(--ubuntu-orange);
+}
+
+.focus\:border-transparent:focus {
+    border-color: transparent;
+}
+
+.transition-all {
+    transition: all 0.2s ease-in-out;
+}
+
+.duration-200 {
+    transition-duration: 200ms;
+}
+
+.resize-none {
+    resize: none;
+}
+
+.block {
+    display: block;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.text-gray-700 {
+    color: #374151;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-12 {
+    margin-bottom: 3rem;
+}
+
+.contact-hero-content {
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.contact-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--apple-gray-dark);
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .contact-hero-title {
+        font-size: 3.75rem;
+    }
+}
+
+.contact-hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--apple-gray);
+    margin-bottom: 3rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.75;
+}
+
+.contact-form-wrapper {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.contact-grid {
+    display: grid;
+    gap: 3rem;
+}
+
+@media (min-width: 768px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.contact-form-section {
+    background: #ffffff;
+}
+
+.contact-form-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f4f6;
+}
+
+/* Contact Form Styles */
+.contact-form-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: white;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--ubuntu-orange);
+    box-shadow: 0 0 0 3px rgba(221, 72, 20, 0.1);
+}
+
+.form-textarea {
+    resize: none;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, var(--ubuntu-orange), var(--accent-color));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(221, 72, 20, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(221, 72, 20, 0.4);
+}
+
+.contact-info {
+    padding: 2rem 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--ubuntu-orange), var(--accent-color));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.social-icons {
+    margin-top: 1rem;
+}
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    background: #f3f4f6;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: linear-gradient(135deg, var(--ubuntu-orange), var(--accent-color));
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background: var(--apple-dark-gray);
+    color: var(--apple-white);
+    padding: 3rem 0;
+}
+
+.contact-footer {
+    background: #111827;
+    color: white;
+    padding: 3rem 0;
+}
+
+.contact-footer .footer-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+/* 
+ * Documentation Notes by Charles:
+ * This CSS file implements Apple-inspired design principles with:
+ * - Smooth cubic-bezier transitions for natural movement
+ * - Subtle shadows and depth effects
+ * - Rounded corners consistent with Apple's design language
+ * - Micro-animations that enhance user experience
+ * - Responsive design that works on all devices
+ * - Accessibility features for better user experience
+ * 
+ * All animations are performance-optimized using transform and opacity
+ * properties to ensure smooth 60fps performance.
+ */
